@@ -1,0 +1,17 @@
+<app-header />
+
+<ul id="users">
+  <user [users]="users" (clickedOn)="clickedOn($event)"></user>
+</ul>
+
+@for (i of list; track i) {
+<keypad (click)="setTime(i)" [label]="i"></keypad>
+}
+
+<button (click)="confirm()">Submit</button>
+
+<ol>
+  @for (_data of user_and_time; track $index) {
+  <li>{{ _data }}</li>
+  }
+</ol>

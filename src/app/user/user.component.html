@@ -1,0 +1,14 @@
+<form>
+  <label for="user">Select your name:</label>
+  <select
+    name="user"
+    [(ngModel)]="selected_user"
+    (ngModelChange)="UserSelected()"
+  >
+    @for (_user of users; track _user.name){
+    <option [value]="_user.name">
+      {{ _user.name }}
+    </option>
+    }
+  </select>
+</form>

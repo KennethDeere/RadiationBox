@@ -33,15 +33,46 @@ export class AppComponent {
     this.selectedUserName = name;
   }
   confirm() {
-    this.display = `${this.selectedUserName} will be using the microwave for ${this.clockTime} minutes!`;
-    for (let i = 0; i < this.user_and_time.length; i++) {
-      if (this.user_and_time[i].includes(this.selectedUserName)) {
-        return;
+    if (this.selectedUserName && this.clockTime) {
+      this.display = `${this.selectedUserName} will be using the microwave for ${this.clockTime} minutes!`;
+      for (let i = 0; i < this.user_and_time.length; i++) {
+        if (this.user_and_time[i].includes(this.selectedUserName)) {
+          this.user_and_time.splice(i, 1);
+          i--;
+          this.noData = '';
+        }
       }
+      this.user_and_time.push(this.display);
+
+      localStorage.setItem('_list', JSON.stringify(this.user_and_time));
+
+      this.clockTime = undefined;
+    } else {
+      this.noData = 'Error! Either name or time was not selected!';
     }
-    this.user_and_time.push(this.display);
   }
+  noData: string = '';
   display = <string>'';
 
   user_and_time: string[] = [];
+
+  constructor() {
+    //let userlist = JSON.stringify(this.user_and_time);
+    //localStorage.setItem('_list', userlist);
+    let getList = localStorage.getItem('_list');
+    if (!!!getList) {
+      localStorage.setItem('_list', JSON.stringify(this.user_and_time));
+    }
+    const getListParsed = JSON.parse(getList) as string[];
+    console.log(getListParsed);
+    this.user_and_time = getListParsed;
+  }
+
+  clear() {
+    localStorage.clear();
+    this.user_and_time = [];
+  }
+  //randomize() {
+  //  shuffle(this.user_and_time)
+  //}
 }

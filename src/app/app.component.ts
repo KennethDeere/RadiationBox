@@ -4,6 +4,8 @@ import { KeypadComponent } from './keypad/keypad/keypad.component';
 import { UserComponent } from './user/user.component';
 import { UserNames } from './user/user.list';
 
+const { DateTime } = require('luxon');
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -14,13 +16,13 @@ import { UserNames } from './user/user.list';
 export class AppComponent {
   users = UserNames;
   selectedUserName: string = '';
-  clockTime?: number;
+  clockTime?: Date;
 
   title = 'RadiationBox';
 
   list = Array.from({ length: 9 }, (value, index) => index + 1);
 
-  setTime(amt: number) {
+  setTime(amt: Date) {
     console.log(amt);
     this.clockTime = amt;
   }
@@ -42,10 +44,14 @@ export class AppComponent {
           this.noData = '';
         }
       }
-      this.user_and_time.push(this.display);
+      this.user_and_time.splice(
+        ((this.user_and_time.length + 1) * Math.random()) | 0,
+        0,
+        this.display
+      );
 
       localStorage.setItem('_list', JSON.stringify(this.user_and_time));
-
+      this.clock = this.clock.minus(this.clockTime);
       this.clockTime = undefined;
     } else {
       this.noData = 'Error! Either name or time was not selected!';
@@ -53,12 +59,12 @@ export class AppComponent {
   }
   noData: string = '';
   display = <string>'';
-
   user_and_time: string[] = [];
 
+  clock = DateTime.local();
+  outputString = dateTime.toFormat('HH:mm');
+
   constructor() {
-    //let userlist = JSON.stringify(this.user_and_time);
-    //localStorage.setItem('_list', userlist);
     let getList = localStorage.getItem('_list');
     if (!!!getList) {
       localStorage.setItem('_list', JSON.stringify(this.user_and_time));
@@ -72,7 +78,7 @@ export class AppComponent {
     localStorage.clear();
     this.user_and_time = [];
   }
-  //randomize() {
-  //  shuffle(this.user_and_time)
-  //}
+  /*  add30(){
+    this.clockTime = this.clockTime +
+  }*/
 }

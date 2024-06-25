@@ -8,6 +8,9 @@
 <keypad (click)="setTime(i)" [label]="i"></keypad>
 }
 <br />
+<!--<button (click)="add30()">Add 30 seconds</button>
+-->
+<br />
 <button (click)="confirm()">Submit</button>
 
 <p>
@@ -19,5 +22,9 @@
   <li>{{ _data }}</li>
   }
 </ol>
-
+<br />
+<!--
+ <p>Click randomize once everyone is in the list</p>
+<button (click)="randomize()">Shuffle list</button>
+-->
 <button (click)="clear()">Clear list</button>

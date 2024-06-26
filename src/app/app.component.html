@@ -1,11 +1,11 @@
 <app-header />
 
 <ul id="users">
-  <user [users]="users" (clickedOn)="clickedOn($event)"></user>
+  <user [users]="Users" (clickedOn)="UserPicker($event)"></user>
 </ul>
 
 @for (i of list; track i) {
-<keypad (click)="setTime(i)" [label]="i"></keypad>
+<keypad (click)="SetTimeButton(i)" [label]="i"></keypad>
 }
 <br />
 <!--<button (click)="add30()">Add 30 seconds</button>
@@ -14,17 +14,14 @@
 <button (click)="confirm()">Submit</button>
 
 <p>
-  {{ noData }}
+  {{ EmptyDataError }}
 </p>
 
 <ol>
-  @for (_data of user_and_time; track $index) {
+  @for (_data of UserAndTimeArray; track $index) {
   <li>{{ _data }}</li>
   }
 </ol>
+<p>{{ StartTimeString }}</p>
 <br />
-<!--
- <p>Click randomize once everyone is in the list</p>
-<button (click)="randomize()">Shuffle list</button>
--->
-<button (click)="clear()">Clear list</button>
+<button (click)="ClearList()">Clear list</button>

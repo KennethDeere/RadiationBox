@@ -25,9 +25,7 @@
               }
             ],
             "styles": ["src/styles.css"],
-            "scripts": [
-              "ng build --base-href https://KennethDeere/github.io/RadiationBox"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {

@@ -1,6 +1,7 @@
 import { UserName } from './user.component';
+export { UserNames };
 
-export const UserNames = <UserName[]>[
+const UserNames = <UserName[]>[
   {
     name: 'Jacob',
   },
@@ -23,3 +24,4 @@ export const UserNames = <UserName[]>[
     name: 'Andrea',
   },
 ];
+UserNames.sort();

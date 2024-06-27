@@ -3,8 +3,11 @@ import { HeaderComponent } from './header/header.component';
 import { KeypadComponent } from './keypad/keypad/keypad.component';
 import { UserComponent } from './user/user.component';
 import { UserNames } from './user/user.list';
-
 import { DateTime } from 'luxon';
+
+//Run this to push to the website.
+//ng build --base-href "https://kennethdeere.github.io/RadiationBox/"
+//npx angular-cli-ghpages --dir=docs/browser
 
 @Component({
   selector: 'app-root',
@@ -14,12 +17,12 @@ import { DateTime } from 'luxon';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  Users = UserNames;
+  Users = UserNames.sort((a, b) => {
+    return a.name > b.name ? 1 : -1;
+  });
   SelectedUserName: string = '';
   UserCookTime?: number;
-
   title = 'RadiationBox';
-
   list = Array.from({ length: 9 }, (value, index) => index + 1);
 
   SetTimeButton(amt: number) {
@@ -58,6 +61,11 @@ export class AppComponent {
       this.CookTime =
         this.CookTimeFormating.toFormat('h:mm').toLocaleLowerCase();
       this.StartTimeString = `First person starts at: ${this.CookTime} `;
+      localStorage.setItem('_StartTime', this.StartTimeString);
+
+      //this.StartTimeString = localStorage.getItem('_StartTime');
+      console.log(this.StartTimeString);
+
       this.UserCookTime = null;
     } else {
       this.EmptyDataError = 'Error! Either name or time was not selected!';
@@ -67,7 +75,7 @@ export class AppComponent {
   DisplayUserAndTime = <string>'';
   UserAndTimeArray: string[] = [];
   CookTime: string;
-  StartTimeString: string;
+  StartTimeString = <string>'';
 
   CookTimeFormating = DateTime.now().set({ hour: 12, minute: 0, second: 0 });
 
@@ -79,12 +87,22 @@ export class AppComponent {
     const getListParsed = getList ? (JSON.parse(getList) as string[]) : [];
     console.log(getListParsed);
     this.UserAndTimeArray = getListParsed;
+    console.log(this.Users, UserNames);
+  }
+
+  ngOnInit() {
+    this.StartTimeString = localStorage.getItem('_StartTime');
   }
 
   ClearList() {
     localStorage.clear();
     this.UserAndTimeArray = [];
     this.StartTimeString = '';
+    this.CookTimeFormating = DateTime.now().set({
+      hour: 12,
+      minute: 0,
+      second: 0,
+    });
   }
   /*  add30(){
     this.clockTime = this.clockTime +

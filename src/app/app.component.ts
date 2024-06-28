@@ -56,7 +56,7 @@ export class AppComponent {
       localStorage.setItem('_list', JSON.stringify(this.UserAndTimeArray));
 
       this.CookTimeFormating = this.CookTimeFormating.minus({
-        minutes: this.UserCookTime,
+        minutes: this.UserCookTime + 1,
       });
       this.CookTime =
         this.CookTimeFormating.toFormat('h:mm').toLocaleLowerCase();

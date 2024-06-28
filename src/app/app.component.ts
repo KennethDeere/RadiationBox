@@ -44,7 +44,6 @@ export class AppComponent {
         if (this.UserAndTimeArray[i].includes(this.SelectedUserName)) {
           this.UserAndTimeArray.splice(i, 1);
           i--;
-          this.EmptyDataError = '';
         }
       }
       this.UserAndTimeArray.splice(
@@ -52,6 +51,7 @@ export class AppComponent {
         0,
         this.DisplayUserAndTime
       );
+      this.EmptyDataError = '';
 
       localStorage.setItem('_list', JSON.stringify(this.UserAndTimeArray));
 

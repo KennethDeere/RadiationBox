@@ -20,7 +20,6 @@ export class UserComponent {
   UserSelected() {
     //this logs when i select a user but when I make log the varialbe I set it too in app component it wont log it.
 
-    //console.log(this.selected_user);
     this.clickedOn.emit(this.selected_user);
   }
 }

@@ -6,20 +6,8 @@ import { KeypadComponent } from './keypad/keypad/keypad.component';
 import { UserComponent } from './user/user.component';
 import { UserNames } from './user/user.list';
 
-//Run this to push to the website.
-//ng build --base-href "https://kennethdeere.github.io/RadiationBox/"
-//npx angular-cli-ghpages --dir=docs/browser
-// "outputPath": "docs",
 /*
-0.add this to scripts in angular.JSON "ng build --base-href https://KennethDeere/github.io/RadiationBox"
-
-1. run ng build --base-href "https://kennethdeere.github.io/RadiationBox/"
-2. Navigate to C:\Users\Jkdeere\Documents\RadiationBox\dist
-3. copy everything inside of "browser"
-4. Move all copied files into dist
-5. run npx angular-cli-ghpages
-
-
+ng build --base-href "https://kennethdeere.github.io/RadiationBox/" && npx angular-cli-ghpages --dir=docs && git add . && git commit -m "changes" && git push origin main
 */
 
 @Component({

@@ -4,24 +4,73 @@
   <user [users]="Users" (clickedOn)="UserPicker($event)"></user>
 </ul>
 
-@for (i of list; track i) {
-<keypad (click)="SetTimeButton(i)" [label]="i"></keypad>
-}
+<div id="keypad-grp">
+  <keypad
+    (click)="SetTimeButton(1)"
+    [label]="1"
+    [selected_number]="UserCookTime"
+  ></keypad>
+  <keypad
+    (click)="SetTimeButton(2)"
+    [label]="2"
+    [selected_number]="UserCookTime"
+  ></keypad>
+  <keypad
+    (click)="SetTimeButton(3)"
+    [label]="3"
+    [selected_number]="UserCookTime"
+  ></keypad>
+  <keypad
+    (click)="SetTimeButton(4)"
+    [label]="4"
+    [selected_number]="UserCookTime"
+  ></keypad>
+  <keypad
+    (click)="SetTimeButton(5)"
+    [label]="5"
+    [selected_number]="UserCookTime"
+  ></keypad>
+  <keypad
+    (click)="SetTimeButton(6)"
+    [label]="6"
+    [selected_number]="UserCookTime"
+  ></keypad>
+  <keypad
+    (click)="SetTimeButton(7)"
+    [label]="7"
+    [selected_number]="UserCookTime"
+  ></keypad>
+  <keypad
+    (click)="SetTimeButton(8)"
+    [label]="8"
+    [selected_number]="UserCookTime"
+  ></keypad>
+  <keypad
+    (click)="SetTimeButton(9)"
+    [label]="9"
+    [selected_number]="UserCookTime"
+  ></keypad>
+</div>
+
 <br />
-<!--<button (click)="add30()">Add 30 seconds</button>
--->
 <br />
-<button (click)="confirm()">Submit</button>
+<button id="grn" (click)="confirm()" (click)="ConfirmCookTime()">Submit</button>
 
 <p>
   {{ EmptyDataError }}
 </p>
 
-<ol>
+<ol class="userlist">
   @for (_data of UserAndTimeArray; track $index) {
-  <li>{{ _data }}</li>
+  <li>
+    {{ _data.name }} will use the Rad Box for {{ _data.time }} minutes.
+    <button id="del" (click)="RemoveFromList($index)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </li>
+
   }
 </ol>
 <p>{{ StartTimeString }}</p>
 <br />
-<button (click)="ClearList()">Clear list</button>
+<button id="red" (click)="ClearList()">Clear list</button>

@@ -11,9 +11,8 @@ export class KeypadComponent {
   //buttonTime?: number;
 
   @Input({ required: true }) label!: number;
+  @Input({ required: true }) selected_number = <number>0;
   @Output() onClick = new EventEmitter<number>();
-
-  selected_number = <number>0;
 
   onClickButton() {
     this.onClick.emit(this.label);

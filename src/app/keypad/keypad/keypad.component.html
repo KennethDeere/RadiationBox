@@ -1,3 +1,6 @@
-<div id="button">
-  <button>{{ label }} minutes</button>
-</div>
+<button
+  class="button"
+  [style.background-color]="selected_number === label ? '#51bed6' : '#8a2be2'"
+>
+  {{ label }}
+</button>

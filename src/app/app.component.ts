@@ -1,25 +1,45 @@
 import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { DateTime } from 'luxon';
 import { HeaderComponent } from './header/header.component';
 import { KeypadComponent } from './keypad/keypad/keypad.component';
 import { UserComponent } from './user/user.component';
 import { UserNames } from './user/user.list';
 
-import { DateTime } from 'luxon';
+//Run this to push to the website.
+//ng build --base-href "https://kennethdeere.github.io/RadiationBox/"
+//npx angular-cli-ghpages --dir=docs/browser
+// "outputPath": "docs",
+/*
+0.add this to scripts in angular.JSON "ng build --base-href https://KennethDeere/github.io/RadiationBox"
+
+1. run ng build --base-href "https://kennethdeere.github.io/RadiationBox/"
+2. Navigate to C:\Users\Jkdeere\Documents\RadiationBox\dist
+3. copy everything inside of "browser"
+4. Move all copied files into dist
+5. run npx angular-cli-ghpages
+
+
+*/
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, KeypadComponent, UserComponent],
+  imports: [HeaderComponent, KeypadComponent, UserComponent, MatIconModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  Users = UserNames;
+  Users = UserNames.sort((a, b) => {
+    return a.name > b.name ? 1 : -1;
+  });
   SelectedUserName: string = '';
-  UserCookTime?: number;
+  UserCookTime: number = 0;
+  UsersCookTotal: number = 0;
+  UserAndTimeObject: UserAndTime;
+  _MinutesOrMinute: string;
 
   title = 'RadiationBox';
-
   list = Array.from({ length: 9 }, (value, index) => index + 1);
 
   SetTimeButton(amt: number) {
@@ -30,45 +50,65 @@ export class AppComponent {
   get selectedUser() {
     return this.Users.find((_user) => _user.name === this.SelectedUserName);
   }
+
   UserPicker(name: string) {
     console.log(name);
     this.SelectedUserName = name;
   }
+
   confirm() {
+    this.UserAndTimeObject = {
+      name: this.SelectedUserName,
+      time: this.UserCookTime,
+    };
     if (this.SelectedUserName && this.UserCookTime) {
-      this.DisplayUserAndTime = `${this.SelectedUserName} will be using the microwave for ${this.UserCookTime} minutes!`;
       for (let i = 0; i < this.UserAndTimeArray.length; i++) {
-        if (this.UserAndTimeArray[i].includes(this.SelectedUserName)) {
-          this.UserAndTimeArray.splice(i, 1);
+        let _user = this.UserAndTimeArray.findIndex(
+          (_user) => _user.name === this.SelectedUserName
+        );
+        if (_user > -1) {
+          this.UserAndTimeArray.splice(_user, 1);
           i--;
-          this.EmptyDataError = '';
         }
       }
       this.UserAndTimeArray.splice(
         ((this.UserAndTimeArray.length + 1) * Math.random()) | 0,
         0,
-        this.DisplayUserAndTime
+        this.UserAndTimeObject
       );
-
+      this.EmptyDataError = '';
       localStorage.setItem('_list', JSON.stringify(this.UserAndTimeArray));
-
-      this.CookTimeFormating = this.CookTimeFormating.minus({
-        minutes: this.UserCookTime,
-      });
-      this.CookTime =
-        this.CookTimeFormating.toFormat('h:mm').toLocaleLowerCase();
-      this.StartTimeString = `First person starts at: ${this.CookTime} `;
-      this.UserCookTime = null;
     } else {
       this.EmptyDataError = 'Error! Either name or time was not selected!';
     }
   }
+  ConfirmCookTime() {
+    this.CookTimeFormating = DateTime.now().set({
+      hour: 12,
+      minute: 0,
+      second: 0,
+    });
+    this.UsersCookTotal = 0;
+    for (let x = 0; x < this.UserAndTimeArray.length; x++) {
+      console.log(this.UserAndTimeArray[x].time);
+      this.UsersCookTotal += this.UserAndTimeArray[x].time;
+    }
+    console.log(this.UsersCookTotal);
+    this.CookTimeFormating = this.CookTimeFormating.minus({
+      minutes: this.UsersCookTotal + 1,
+    });
+    this.CookTime = this.CookTimeFormating.toFormat('h:mm').toLocaleLowerCase();
+    this.StartTimeString = `First person starts at: ${this.CookTime} `;
+    localStorage.setItem('_StartTime', this.StartTimeString);
+    console.log(this.StartTimeString);
+    this.UserCookTime = null;
+  }
+
   EmptyDataError: string = '';
   DisplayUserAndTime = <string>'';
-  UserAndTimeArray: string[] = [];
+  UserAndTimeArray: UserAndTime[] = [];
   CookTime: string;
-  StartTimeString: string;
-
+  StartTimeString = <string>'';
   CookTimeFormating = DateTime.now().set({ hour: 12, minute: 0, second: 0 });
 
   constructor() {
@@ -76,17 +116,52 @@ export class AppComponent {
     if (!!!getList) {
       localStorage.setItem('_list', JSON.stringify(this.UserAndTimeArray));
     }
-    const getListParsed = getList ? (JSON.parse(getList) as string[]) : [];
+    const getListParsed = getList ? (JSON.parse(getList) as UserAndTime[]) : [];
     console.log(getListParsed);
     this.UserAndTimeArray = getListParsed;
+    console.log(this.Users, UserNames);
+  }
+
+  ngOnInit() {
+    this.StartTimeString = localStorage.getItem('_StartTime');
   }
 
   ClearList() {
     localStorage.clear();
     this.UserAndTimeArray = [];
     this.StartTimeString = '';
+    this.CookTimeFormating = DateTime.now().set({
+      hour: 12,
+      minute: 0,
+      second: 0,
+    });
   }
-  /*  add30(){
-    this.clockTime = this.clockTime +
-  }*/
+  RemoveFromList(index: number) {
+    this.UserAndTimeArray.splice(index, 1);
+    this.CookTimeFormating = DateTime.now().set({
+      hour: 12,
+      minute: 0,
+      second: 0,
+    });
+    this.UsersCookTotal = 0;
+    for (let x = 0; x < this.UserAndTimeArray.length; x++) {
+      console.log(this.UserAndTimeArray[x].time);
+      this.UsersCookTotal += this.UserAndTimeArray[x].time;
+    }
+    console.log(this.UsersCookTotal);
+    this.CookTimeFormating = this.CookTimeFormating.minus({
+      minutes: this.UsersCookTotal + 1,
+    });
+    this.CookTime = this.CookTimeFormating.toFormat('h:mm').toLocaleLowerCase();
+    this.StartTimeString = `First person starts at: ${this.CookTime} `;
+    localStorage.setItem('_StartTime', this.StartTimeString);
+    console.log(this.StartTimeString);
+    this.UserCookTime = null;
+    localStorage.setItem('_list', JSON.stringify(this.UserAndTimeArray));
+  }
+}
+
+interface UserAndTime {
+  name: string;
+  time: number;
 }

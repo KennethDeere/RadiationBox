@@ -13,7 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/radiation-box",
+            "outputPath": {
+              "base": "docs",
+              "browser": ""
+            },
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -25,9 +28,7 @@
               }
             ],
             "styles": ["src/styles.css"],
-            "scripts": [
-              "ng build --base-href https://KennethDeere/github.io/RadiationBox"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { DateTime } from 'luxon';
 import { HeaderComponent } from './header/header.component';
@@ -13,7 +14,13 @@ ng build --base-href "https://kennethdeere.github.io/RadiationBox/" && npx angul
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, KeypadComponent, UserComponent, MatIconModule],
+  imports: [
+    HeaderComponent,
+    KeypadComponent,
+    UserComponent,
+    MatIconModule,
+    MatButtonModule,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -83,7 +90,7 @@ export class AppComponent {
     }
     console.log(this.UsersCookTotal);
     this.CookTimeFormating = this.CookTimeFormating.minus({
-      minutes: this.UsersCookTotal + 1,
+      minutes: this.UsersCookTotal,
     });
     this.CookTime = this.CookTimeFormating.toFormat('h:mm').toLocaleLowerCase();
     this.StartTimeString = `First person starts at: ${this.CookTime} `;
@@ -138,7 +145,7 @@ export class AppComponent {
     }
     console.log(this.UsersCookTotal);
     this.CookTimeFormating = this.CookTimeFormating.minus({
-      minutes: this.UsersCookTotal + 1,
+      minutes: this.UsersCookTotal,
     });
     this.CookTime = this.CookTimeFormating.toFormat('h:mm').toLocaleLowerCase();
     this.StartTimeString = `First person starts at: ${this.CookTime} `;

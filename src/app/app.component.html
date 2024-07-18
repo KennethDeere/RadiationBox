@@ -1,104 +1,105 @@
 <div><app-header /></div>
 
-<div class="users">
-  <ul>
-    <user [users]="Users" (clickedOn)="UserPicker($event)"></user>
-  </ul>
-</div>
-
-<div class="KeypadLocation">
-  <div id="keypad-grp">
-    <keypad
-      (click)="SetTimeButton(1)"
-      [label]="1"
-      [selected_number]="UserCookTime"
-    ></keypad>
-    <keypad
-      (click)="SetTimeButton(2)"
-      [label]="2"
-      [selected_number]="UserCookTime"
-    ></keypad>
-    <keypad
-      (click)="SetTimeButton(3)"
-      [label]="3"
-      [selected_number]="UserCookTime"
-    ></keypad>
-    <keypad
-      (click)="SetTimeButton(4)"
-      [label]="4"
-      [selected_number]="UserCookTime"
-    ></keypad>
-    <keypad
-      (click)="SetTimeButton(5)"
-      [label]="5"
-      [selected_number]="UserCookTime"
-    ></keypad>
-    <keypad
-      (click)="SetTimeButton(6)"
-      [label]="6"
-      [selected_number]="UserCookTime"
-    ></keypad>
-    <keypad
-      (click)="SetTimeButton(7)"
-      [label]="7"
-      [selected_number]="UserCookTime"
-    ></keypad>
-    <keypad
-      (click)="SetTimeButton(8)"
-      [label]="8"
-      [selected_number]="UserCookTime"
-    ></keypad>
-    <keypad
-      (click)="SetTimeButton(9)"
-      [label]="9"
-      [selected_number]="UserCookTime"
-    ></keypad>
-  </div>
-  <br />
-
-  <div class="submit">
-    <div class="confirm">
-      <button
-        class="buttonOther"
-        id="grn"
-        (click)="confirm()"
-        (click)="ConfirmCookTime()"
-      >
-        Submit
-      </button>
+<div class="ContentRow">
+  <div class="KeypadLocation">
+    <div class="users">
+      <ul>
+        <user [users]="Users" (clickedOn)="UserPicker($event)"></user>
+      </ul>
     </div>
-    <div class="error">
-      <p>
-        {{ EmptyDataError }}
-      </p>
+    <div id="keypad-grp">
+      <keypad
+        (click)="SetTimeButton(1)"
+        [label]="1"
+        [selected_number]="UserCookTime"
+      ></keypad>
+      <keypad
+        (click)="SetTimeButton(2)"
+        [label]="2"
+        [selected_number]="UserCookTime"
+      ></keypad>
+      <keypad
+        (click)="SetTimeButton(3)"
+        [label]="3"
+        [selected_number]="UserCookTime"
+      ></keypad>
+      <keypad
+        (click)="SetTimeButton(4)"
+        [label]="4"
+        [selected_number]="UserCookTime"
+      ></keypad>
+      <keypad
+        (click)="SetTimeButton(5)"
+        [label]="5"
+        [selected_number]="UserCookTime"
+      ></keypad>
+      <keypad
+        (click)="SetTimeButton(6)"
+        [label]="6"
+        [selected_number]="UserCookTime"
+      ></keypad>
+      <keypad
+        (click)="SetTimeButton(7)"
+        [label]="7"
+        [selected_number]="UserCookTime"
+      ></keypad>
+      <keypad
+        (click)="SetTimeButton(8)"
+        [label]="8"
+        [selected_number]="UserCookTime"
+      ></keypad>
+      <keypad
+        (click)="SetTimeButton(9)"
+        [label]="9"
+        [selected_number]="UserCookTime"
+      ></keypad>
     </div>
-  </div>
-</div>
-
-<div class="ListAndClear">
-  <div class="UserOrder">
-    <ol>
-      @for (_data of UserAndTimeArray; track $index) {
-      <li>
-        {{ _data.name }} will use the Rad Box for {{ _data.time }} minutes.
-        <button id="del" (click)="RemoveFromList($index)">
-          <mat-icon>delete</mat-icon>
+    <div class="submit">
+      <div class="confirm">
+        <br />
+        <button
+          class="buttonOther"
+          id="grn"
+          (click)="confirm()"
+          (click)="ConfirmCookTime()"
+        >
+          Submit
         </button>
-      </li>
-      }
-    </ol>
-  </div>
-  <div>
-    <div class="TimeStart">
-      <p>{{ StartTimeString }}</p>
+      </div>
+      <div class="error">
+        <p>
+          {{ EmptyDataError }}
+        </p>
+      </div>
     </div>
+  </div>
+  <div class="ListAndClear">
+    <div class="UserOrder">
+      <ol>
+        @for (_data of UserAndTimeArray; track $index) {
+        <li>
+          {{ _data.name }} will use the Rad Box for {{ _data.time }} minutes.
+          <button id="del" (click)="RemoveFromList($index)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </li>
+        }
+      </ol>
 
-    <br />
+      <div>
+        <div class="TimeStart">
+          <p>{{ StartTimeString }}</p>
+        </div>
 
-    <div class="Clear">
-      <button class="buttonOther" id="red" (click)="ClearList()">
-        Clear list
-      </button>
+        <br />
+
+        <div class="Clear">
+          <button class="buttonOther" id="red" (click)="ClearList()">
+            Clear list
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<br />

@@ -8,16 +8,6 @@
 
 body {
   background-color: lightgray;
-  display: grid;
-  grid-template-columns: 50%;
-  grid-template-rows: 50%;
-}
-
-.title {
-  font-size: 50px;
-}
-.intro {
-  font-size: 30px;
 }
 
 #users {
@@ -25,7 +15,10 @@ body {
 }
 
 .KeypadLocation {
-  grid-template-areas: 20%/40%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 #keypad-grp {
   display: grid;
@@ -64,6 +57,13 @@ keypad > .button:hover {
   cursor: pointer;
   border-radius: 8px;
   box-shadow: 5px 5px 0px;
+}
+
+.ListAndClear {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 #grn {

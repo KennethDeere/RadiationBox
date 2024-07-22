@@ -10,6 +10,9 @@ body {
   background-color: lightgray;
 }
 
+keypad {
+  position: relative;
+}
 .button {
   border: 2px solid black;
   color: #000;
@@ -18,6 +21,12 @@ body {
   border-radius: 8px;
   box-shadow: 5px 5px 0px;
   position: absolute;
+}
+
+keypad > .button:hover {
+  box-shadow: none;
+  top: 5px;
+  left: 5px;
 }
 
 #grn {

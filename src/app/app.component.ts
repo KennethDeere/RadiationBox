@@ -153,8 +153,14 @@ export class AppComponent {
     console.log(this.StartTimeString);
     this.UserCookTime = null;
     localStorage.setItem('_list', JSON.stringify(this.UserAndTimeArray));
+    if (this.UserAndTimeArray.length === 0) {
+      this.ClearList();
+    }
   }
 }
+
+//var audio = new Audio('audio_file.mp3');
+//audio.play();
 
 interface UserAndTime {
   name: string;

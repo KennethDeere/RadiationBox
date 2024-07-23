@@ -1,4 +1,6 @@
 .list {
   background-color: rgb(21, 245, 186);
   border-radius: 5px;
+  border-width: 2px;
+  border-color: purple;
 }

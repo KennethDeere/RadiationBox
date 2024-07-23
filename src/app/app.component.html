@@ -4,7 +4,11 @@
     <div class="KeypadLocation">
       <div class="users">
         <ul>
-          <user [users]="Users" (clickedOn)="UserPicker($event)"></user>
+          <user
+            class="dropdown"
+            [users]="Users"
+            (clickedOn)="UserPicker($event)"
+          ></user>
         </ul>
       </div>
       <div id="keypad-grp">
@@ -54,6 +58,11 @@
           [selected_number]="UserCookTime"
         ></keypad>
       </div>
+      <div class="error">
+        <p class="">
+          {{ EmptyDataError }}
+        </p>
+      </div>
     </div>
     <div class="ListAndClear">
       <div class="UserOrder">
@@ -87,11 +96,6 @@
       >
         Submit
       </button>
-      <div class="error">
-        <p>
-          {{ EmptyDataError }}
-        </p>
-      </div>
     </div>
     <div class="Clear">
       <button class="buttonOther" id="red" (click)="ClearList()">

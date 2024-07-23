@@ -1,6 +1,7 @@
-<form>
+<form class="namebox">
   <label for="user">Name:</label>
   <select
+    class="list"
     name="user"
     [(ngModel)]="selected_user"
     (ngModelChange)="UserSelected()"

@@ -10,6 +10,7 @@ import { UserNames } from './user/user.list';
 /*
 ng build --base-href "https://kennethdeere.github.io/RadiationBox/" && npx angular-cli-ghpages --dir=docs && git add . && git commit -m "changes" && git push origin main
 */
+// test
 /*test test test*/
 
 @Component({

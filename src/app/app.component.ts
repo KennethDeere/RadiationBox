@@ -10,8 +10,6 @@ import { UserNames } from './user/user.list';
 /*
 ng build --base-href "https://kennethdeere.github.io/RadiationBox/" && npx angular-cli-ghpages --dir=docs && git add . && git commit -m "changes" && git push origin main
 */
-// test
-/*test test test*/
 
 @Component({
   selector: 'app-root',
@@ -159,11 +157,20 @@ export class AppComponent {
       this.ClearList();
     }
   }
+  EasterOne() {
+    for (var i=0; i < this.UserAndTimeArray.length; i++){
+      if (this.UserAndTimeArray[i].name === "Jacob") {
+        this.UserAndTimeArray.splice(0,0,this.UserAndTimeArray[i])
+        this.UserAndTimeArray.splice(i+1,1)
+      }
+    }
+  }
+//   audio = new Audio('audio_file.mp3');
+//   if (this.CookTime ===) {
+//     audio.play();
+// }
 }
-
-//var audio = new Audio('audio_file.mp3');
-//audio.play();
-
+                                                                          
 interface UserAndTime {
   name: string;
   time: number;

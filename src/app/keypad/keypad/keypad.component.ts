@@ -8,7 +8,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './keypad.component.css',
 })
 export class KeypadComponent {
-  //buttonTime?: number;
 
   @Input({ required: true }) label!: number;
   @Input({ required: true }) selected_number = <number>0;

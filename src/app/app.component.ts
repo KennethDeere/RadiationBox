@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+//import { sound } from 'Hub.mp3';
 import { DateTime } from 'luxon';
+// import * as sound from 'src/assets/applause_y.wav';
 import { HeaderComponent } from './header/header.component';
 import { KeypadComponent } from './keypad/keypad/keypad.component';
 import { UserComponent } from './user/user.component';
@@ -158,19 +160,33 @@ export class AppComponent {
     }
   }
   EasterOne() {
-    for (var i=0; i < this.UserAndTimeArray.length; i++){
-      if (this.UserAndTimeArray[i].name === "Jacob") {
-        this.UserAndTimeArray.splice(0,0,this.UserAndTimeArray[i])
-        this.UserAndTimeArray.splice(i+1,1)
+    for (var i = 0; i < this.UserAndTimeArray.length; i++) {
+      if (this.UserAndTimeArray[i].name === 'Jacob') {
+        this.UserAndTimeArray.splice(0, 0, this.UserAndTimeArray[i]);
+        this.UserAndTimeArray.splice(i + 1, 1);
       }
     }
   }
-//   audio = new Audio('audio_file.mp3');
-//   if (this.CookTime ===) {
-//     audio.play();
-// }
+
+  TimerStart = DateTime.now().set({
+    hour: 12,
+    minute: 0,
+    second: 0,
+  });
+  TimerEnd = this.TimerStart.minus({ minutes: this.UsersCookTotal });
+
+  //Alarm() {
+  //if (DateTime.now() === this.TimerEnd) {
+  // var audio = new Audio(sound);
+  //const audio = new Audio('../assets/applause_y.wav');
+  // const audio = new Audio('../assets/applause_y.wav');
+  // const audio = new Audio('../assets/applause_y.wav');
+  //audio.play();
+  //console.log('mp3');
+  //}
+  //}
+  //IntervalID = setInterval(this.Alarm, 30000);
 }
-                                                                          
 interface UserAndTime {
   name: string;
   time: number;

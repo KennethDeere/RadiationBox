@@ -99,6 +99,9 @@ export class AppComponent {
     localStorage.setItem('_StartTime', this.StartTimeString);
     console.log(this.StartTimeString);
     this.UserCookTime = null;
+    if (this.UserAndTimeArray.length === 0) {
+      this.ClearList();
+    }
   }
 
   EmptyDataError: string = '';

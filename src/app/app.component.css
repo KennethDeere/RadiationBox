@@ -88,6 +88,12 @@
   box-shadow: 5px 5px 0px;
 }
 
+.buttonOther:active {
+  background-color: #3e8e41;
+  box-shadow: none;
+  transform: translateY(4px);
+}
+
 .ListAndClear {
   display: flex;
   justify-content: center;

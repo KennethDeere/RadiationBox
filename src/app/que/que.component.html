@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+
+<header>3D Que</header>
+
+<form class="form">
+  <table class="example-full-width" cellspacing="10">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input
+            [(ngModel)]="Name"
+            [ngModelOptions]="{ standalone: true }"
+            matInput
+            placeholder="Name"
+          />
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input
+            [(ngModel)]="PrintName"
+            [ngModelOptions]="{ standalone: true }"
+            matInput
+            placeholder="Print Name"
+          />
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input
+            [(ngModel)]="Time"
+            [ngModelOptions]="{ standalone: true }"
+            matInput
+            placeholder="Print Time"
+          />
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+</form>
+
+<button (click)="Submit()" class="Submit">Submit</button>
+
+<div class="ListAndClear">
+  <div class="UserOrder">
+    <ol id="list">
+      @for (_data of QueueArray; track $index) {
+      <li id="del">
+        {{ _data.Name }} will print {{ _data.PrintName }} for {{ _data.Time }}.
+        <button mat-icon-button (click)="RemoveFromList($index)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </li>
+      }
+    </ol>
+    <div>
+      <div class="TimeStart">
+        <p></p>
+      </div>
+    </div>
+  </div>
+</div>

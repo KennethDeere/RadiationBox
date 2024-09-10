@@ -129,7 +129,8 @@ export class RadboxComponent {
   }
 
   ClearList() {
-    localStorage.clear();
+    localStorage.removeItem('_list');
+    localStorage.removeItem('_StartTime');
     this.UserAndTimeArray = [];
     this.StartTimeString = '';
     this.CookTimeFormating = DateTime.now().set({

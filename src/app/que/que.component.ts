@@ -50,10 +50,22 @@ export class QueComponent {
     } else {
       this.EmptyDataError = ' Error! One of the boxes is empty!';
     }
+    localStorage.setItem('_prints', JSON.stringify(this.QueueArray));
   }
 
   RemoveFromList(index: number) {
     this.QueueArray.splice(index, 1);
+    localStorage.setItem('_prints', JSON.stringify(this.QueueArray));
+  }
+
+  constructor() {
+    let getList = localStorage.getItem('_prints');
+    if (!!!getList) {
+      localStorage.setItem('_prints', JSON.stringify(this.QueueArray));
+    }
+    const getListParsed = getList ? (JSON.parse(getList) as InputArray[]) : [];
+    console.log(getListParsed);
+    this.QueueArray = getListParsed;
   }
 }
 interface InputArray {

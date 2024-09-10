@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<header>3D Que</header>
+<header>3D Queue</header>
 
 <form class="form">
   <table class="example-full-width" cellspacing="10">
@@ -41,6 +41,8 @@
 
 <button (click)="Submit()" class="Submit">Submit</button>
 
+{{ EmptyDataError }}
+
 <div class="ListAndClear">
   <div class="UserOrder">
     <ol id="list">
@@ -53,10 +55,5 @@
       </li>
       }
     </ol>
-    <div>
-      <div class="TimeStart">
-        <p></p>
-      </div>
-    </div>
   </div>
 </div>

@@ -32,13 +32,24 @@ export class QueComponent {
   Name = <string>'';
   PrintName = <string>'';
   Time = <string>'';
+  QueueObject: InputArray;
   QueueArray: InputArray[] = [];
+  EmptyDataError = <string>'';
 
   Submit() {
-    const User = this.Name;
-    const Print = this.PrintName;
-    const PrintTime = this.Time;
-    console.log(User, Print, PrintTime);
+    if (this.Name && this.PrintName && this.Time) {
+      this.QueueObject = {
+        Name: this.Name,
+        Time: this.Time,
+        PrintName: this.PrintName,
+      };
+      this.QueueArray.push(this.QueueObject);
+      this.Name = '';
+      this.PrintName = '';
+      this.Time = '';
+    } else {
+      this.EmptyDataError = ' Error! One of the boxes is empty!';
+    }
   }
 
   RemoveFromList(index: number) {
@@ -48,5 +59,5 @@ export class QueComponent {
 interface InputArray {
   Name: string;
   PrintName: string;
-  Time: number;
+  Time: string;
 }

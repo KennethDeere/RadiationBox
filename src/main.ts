@@ -5,5 +5,5 @@ import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 
 bootstrapApplication(AppComponent, {
-  providers: [provideAnimationsAsync(), provideRouter(routes)],
+  providers: [provideAnimationsAsync(), provideRouter(routes), provideAnimationsAsync()],
 }).catch((err) => console.error(err));

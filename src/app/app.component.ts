@@ -5,6 +5,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './radbox/header/header.component';
 import { KeypadComponent } from './radbox/keypad/keypad.component';
 import { UserComponent } from './user/user.component';
+import { provideHttpClient } from '@angular/common/http';
 
 /*
 ng build --base-href "https://kennethdeere.github.io/RadiationBox/" && npx angular-cli-ghpages --dir=docs && git add . && git commit -m "changes" && git push origin main
@@ -24,5 +25,6 @@ ng build --base-href "https://kennethdeere.github.io/RadiationBox/" && npx angul
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
+  providers: [],
 })
 export class AppComponent {}

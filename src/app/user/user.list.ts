@@ -22,4 +22,7 @@ export const UserNames = <UserName[]>[
   {
     name: 'Dylan',
   },
+  {
+    name: 'Eli',
+  },
 ];

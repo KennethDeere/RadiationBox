@@ -14,7 +14,7 @@ export const UserNames = <UserName[]>[
     name: 'Evan',
   },
   {
-    name: 'Micah',
+    name: 'Ben',
   },
   {
     name: 'Tarka',
